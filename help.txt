@@ -1,0 +1,21 @@
+python balloon.py splash --weights=C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/mask_rcnn_balloon.h5 --image=C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/images/12283150_12d37e6389_z.jpg
+
+
+python balloon.py splash --weights=C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/mask_rcnn_balloon.h5 --image=maskrcnn/Mask_RCNN/images/12283150_12d37e6389_z.jpg
+
+python balloon.py splash --weights=maskrcnn/Mask_RCNN/mask_rcnn_balloon.h5 --image=maskrcnn/Mask_RCNN/images/12283150_12d37e6389_z.jpg
+
+maskrcnn/Mask_RCNN/images/12283150_12d37e6389_z.jpg
+
+python balloon.py splash --weights="C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/mask_rcnn_balloon.h5" --image="C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/images/12283150_12d37e6389_z.jpg"
+
+C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/images/bals.jpg
+python balloon.py splash --weights="C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/mask_rcnn_balloon.h5" --image="C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/Mask_RCNN/images/bals.jpg"
+
+TRAINING
+python tumor.py train --dataset="C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/tumordataset2" --weights=coco
+
+INFERENCED
+python tumor.py splash --weights="C:\Users\John\Desktop\UCSD\CT lab\maskrcnn\Mask_RCNN\logs\tumor20211231T1726\mask_rcnn_tumor_0030.h5" --image="C:\Users\John\Desktop\UCSD\CT lab\CTMR_robot_lab\testpictures\IMG-0008-00037.png"
+python "C:\Users\John\Desktop\UCSD\CT lab\maskrcnn\Mask_RCNN\samples\tumor\tumor.py" splash --weights="C:\Users\John\Desktop\UCSD\CT lab\maskrcnn\Mask_RCNN\logs\tumor20211231T1726\mask_rcnn_tumor_0030.h5" --image="C:\Users\John\Desktop\UCSD\CT lab\CTMR_robot_lab\testpictures\IMG-0008-00037.png"
+

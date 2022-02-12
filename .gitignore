@@ -1,0 +1,5 @@
+CTMR_robot_lab/**
+maskrcnn/tumordataset/**
+maskrcnn/tumordataset2/**
+*dicom
+*png
