@@ -2,10 +2,13 @@ import os
 import sys
 import json
 import datetime
+from nbformat import read
 import numpy as np
 import skimage.draw
 import pydicom
 import cv2
+import time
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 ROOT_DIR = os.path.abspath("../../")
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -178,6 +181,7 @@ def dicom_folder_splash(model, folder_path=None):
     assert folder_path
     if folder_path:
         for im in os.listdir(folder_path):
+            ### Time inference and just loading data, and dataprep
 
             # original staright up dicom
             # image = pydicom.read_file(folder_path+"/"+im)
@@ -185,6 +189,7 @@ def dicom_folder_splash(model, folder_path=None):
             # image = skimage.io.imread(folder_path+"/"+im)
 
             # gotta turn to png then read, omit if no save png
+            start = time. time()
             image = pydicom.read_file(folder_path+"/"+im)
             image = image.pixel_array #raw pixel data
 
@@ -192,7 +197,8 @@ def dicom_folder_splash(model, folder_path=None):
             image = cv2.imencode('.png', image)[1].tobytes()
             image = np.frombuffer(image, np.byte)
             image = cv2.imdecode(image, cv2.IMREAD_ANYCOLOR)
-
+            end = time. time()
+            print("&"*200,"\n",end - start, '\n')
 
             # To save png and reread
             # output_folder = "/".join(folder_path.split("/")[:-1])+"/"+folder_path.split("/")[-1]+"_png/"
@@ -205,7 +211,13 @@ def dicom_folder_splash(model, folder_path=None):
 
             if image.ndim != 3:
                 image = skimage.color.gray2rgb(image)
+
+
+            start = time. time()
             r = model.detect([image], verbose=1)[0]
+            end = time. time()
+            print("@"*200,"\n",end - start, '\n')
+
             splash = color_splash(image, r['masks'])
             output_folder = "/".join(folder_path.split("/")[:-1])+"/"+folder_path.split("/")[-1]+"_splash/"
             if not os.path.exists(output_folder):
@@ -281,6 +293,19 @@ def detect_and_color_splash(model, image_path=None, video_path=None):
                 count += 1
         vwriter.release()
     print("Saved to ", file_name)
+
+def read_dicom_to_np(dicom_path, resolution=False): 
+    #resulution true means better res, not good with inference
+    image = pydicom.read_file(dicom_path)
+    image = image.pixel_array #raw pixel data
+    if resolution == True:
+        # return image
+        pass
+    else:
+        image = cv2.imencode('.png', image)[1].tobytes()
+        image = np.frombuffer(image, np.byte)
+        image = cv2.imdecode(image, cv2.IMREAD_ANYCOLOR)
+    return image
 
 
 ############################################################
@@ -379,6 +404,9 @@ def main():
     # Train or evaluate
     if args.command == "train":
         train(model)
+    # elif args.command == "read":
+    #     read_dicom_to_np
+        pass
     elif args.command == "splash":
         # detect_and_color_splash(model, image_path=args.image,
         #                         video_path=args.video)

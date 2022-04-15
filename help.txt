@@ -19,3 +19,5 @@ INFERENCED
 python tumor.py splash --weights="C:\Users\John\Desktop\UCSD\CT lab\maskrcnn\Mask_RCNN\logs\tumor20211231T1726\mask_rcnn_tumor_0030.h5" --image="C:\Users\John\Desktop\UCSD\CT lab\CTMR_robot_lab\testpictures\IMG-0008-00037.png"
 python "C:\Users\John\Desktop\UCSD\CT lab\maskrcnn\Mask_RCNN\samples\tumor\tumor.py" splash --weights="C:\Users\John\Desktop\UCSD\CT lab\maskrcnn\Mask_RCNN\logs\tumor20211231T1726\mask_rcnn_tumor_0030.h5" --image="C:\Users\John\Desktop\UCSD\CT lab\CTMR_robot_lab\testpictures\IMG-0008-00037.png"
 
+slicer nrrd cmd run
+"C:\Users\John\AppData\Local\NA-MIC\Slicer 4.11.20210226\Slicer.exe" C:\Users\John\Desktop\UCSD\CT lab\flask_serv\nrrd_files\image.nrrd
