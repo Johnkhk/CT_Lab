@@ -109,7 +109,9 @@ class BalloonDataset(utils.Dataset):
         # }
         # We mostly care about the x and y coordinates of each region
         # Note: In VIA 2.0, regions was changed from a dict to a list.
-        annotations = json.load(open(os.path.join(dataset_dir, "via_region_data.json")))
+        # annotations = json.load(open(os.path.join(dataset_dir, "via_region_data.json")))
+        # annotations = json.load(open(os.path.join(dataset_dir, "tumor150_12_29.json")))
+        annotations = json.load("C:/Users/John/Desktop/UCSD/CT lab/maskrcnn/tumordataset/tumor150_12_29.json")
         annotations = list(annotations.values())  # don't need the dict keys
 
         # The VIA tool saves images in the JSON even if they don't have any
@@ -213,10 +215,16 @@ def color_splash(image, mask):
     if mask.shape[-1] > 0:
         # We're treating all instances as one, so collapse the mask into one layer
         mask = (np.sum(mask, -1, keepdims=True) >= 1)
+
+        w,h = image.shape
+        # np.array([255,0,0])
+
         splash = np.where(mask, image, gray).astype(np.uint8)
     else:
         splash = gray.astype(np.uint8)
-    return splash
+    # return splash
+    return mask
+
 
 
 def detect_and_color_splash(model, image_path=None, video_path=None):
